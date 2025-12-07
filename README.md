@@ -1,4 +1,4 @@
-# **Flood Susceptibility Mapping in Rangpur Division Using AHP and Multi-Criteria GIS Analysis**
+# **Flood Susceptibility Mapping in the Rangpur Division Using AHP and Google Earth Engine–Based Multi-Criteria GIS Analysis**
 
 ## **Overview**
 
