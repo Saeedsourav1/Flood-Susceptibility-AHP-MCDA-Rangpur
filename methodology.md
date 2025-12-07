@@ -19,7 +19,6 @@ The methodological framework consists of the following stages:
 5. **Weighted Linear Combination (WLC) Modelling**
 6. **Flood Susceptibility Classification**
 7. **Area-Based Susceptibility Assessment**
-8. **Validation & Interpretation**
 
 Each stage is described in depth below.
 
@@ -136,7 +135,7 @@ You can paste this directly into your **README.md** or **methodology.md**.
 
 ---
 
-# **📊 Flood Conditioning Factors, Subclasses, Area Coverage, Rank, and AHP Weight**
+# **5.1 Flood Conditioning Factors, Subclasses, Area Coverage, Rank, and AHP Weight**
 
 
 ## **Table: Weighted Evaluation of Flood Conditioning Layers**
@@ -211,11 +210,8 @@ AHP was used to assign objective weights to the eight factors.
 Each value is divided by the column sum.
 The average of each row gives the eigenvector weight.
 
-[
-w_i = \frac{\sum_{j=1}^{n} a_{ij}'}{n}
-]
+![AHP Weight Formula](https://latex.codecogs.com/svg.latex?w_i%20=%20%5Cfrac%7B%5Csum_%7Bj=1%7D%5En%20a_%7Bij%7D' %7D%7Bn%7D)
 
-Where ( a_{ij}' ) is the normalized value.
 
 ---
 
@@ -223,18 +219,18 @@ Where ( a_{ij}' ) is the normalized value.
 
 AHP requires a consistency ratio < 0.10.
 
-[
-CI = \frac{\lambda_{\text{max}} - n}{n-1}
-]
+**Consistency Index (CI):**
 
-[
-CR = \frac{CI}{RI}
-]
+![CI](https://latex.codecogs.com/svg.latex?CI%20=%20%5Cfrac%7B%5Clambda_%7Bmax%7D%20-%20n%7D%7Bn-1%7D)
+
+**Consistency Ratio (CR):**
+
+![CR](https://latex.codecogs.com/svg.latex?CR%20=%20%5Cfrac%7BCI%7D%7BRI%7D)
 
 Where:
 
-* ( \lambda_{\text{max}} ) = maximum eigenvalue
-* **RI** = Random Index
+- \( \lambda_{\text{max}} \) = maximum eigenvalue  
+- **RI** = Random Index
 
 If CR > 0.10, the matrix must be revised.
 
@@ -244,14 +240,13 @@ If CR > 0.10, the matrix must be revised.
 
 The Weighted Linear Combination (WLC) model integrates all standardized rasters:
 
-[
-FSI = \sum_{i=1}^{8} (w_i \cdot f_i)
-]
+![FSI](https://latex.codecogs.com/svg.latex?FSI%20=%20%5Csum_{i=1}^{8}%20(w_i%20%5Ccdot%20f_i))
 
 Where:
 
-* ( w_i ) = Weight of factor *i*
-* ( f_i ) = Standardized raster
+- \( w_i \) = Weight of factor *i*  
+- \( f_i \) = Standardized raster value
+
 
 This produces a continuous raster surface representing flood likelihood.
 
@@ -273,8 +268,7 @@ Steps:
 ### **8.2 Raster Calculator Method**
 
 
-
-Example formula:
+Formula:
 
 ```
 ("FSS_temp" = 0.35*(6 - "Elevation") + 0.24*"Slope" + 0.02*"PREC" + 0.15*"FlowAcc" + 0.1*"DTR" + 0.06*"LULC" + 0.03*(6 - "NDVI") + 0.04*"TWI")
@@ -309,13 +303,14 @@ The resulting zonation map communicates spatial flood risk levels.
 
 To quantify vulnerability:
 
-[
-\text{Area}*{class} = N*{pixels} \times \text{Cell Size}^2
-]
+**Area Calculation Formula**
+
+![Area Formula](https://latex.codecogs.com/svg.latex?%5Ctext{Area}_{class}%20=%20N_{pixels}%20%5Ctimes%20(%5Ctext{Cell%20Size})^2)
 
 Where:
 
-* ( N_{pixels} ) = Count of pixels within each class
+- \( N_{pixels} \) = Count of pixels within each class
+
 
 Outputs include:
 
