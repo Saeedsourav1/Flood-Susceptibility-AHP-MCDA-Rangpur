@@ -5,9 +5,10 @@ This section presents the spatial distribution of flood susceptibility across th
 Upazila-wise areas were calculated using the **Tabulate Area** tool in ArcMap.
 The proportion of susceptible land was derived using:
 
-[
-\text{% Susceptible} = \frac{\text{High} + \text{Very High}}{\text{Total Area}} \times 100
-]
+$$
+\% \text{Susceptible} = \frac{\text{High} + \text{Very High}}{\text{Total Area}} \times 100
+$$
+
 
 ---
 
@@ -40,9 +41,6 @@ This bar chart summarizes the proportion of land classified as **High** and **Ve
 
 📊 **Output:**
 `results/upazila_bar_chart.png`
-
-*(Insert image during manuscript preparation.)*
-
 ---
 
 ## **2. Heatmap — Relative Flood Susceptibility**
@@ -52,7 +50,6 @@ Darker shades represent areas with higher flood vulnerability.
 
 🌡️ **Output:**
 `results/upazila_heatmap.png`
-
 ---
 
 # **Interpretation of Results**
@@ -64,7 +61,6 @@ Darker shades represent areas with higher flood vulnerability.
 * **Nilphamari (65.06%)**
 
 These Upazilas fall within the **Teesta–Brahmaputra floodplain**, where braided rivers, low-lying topography, and intense monsoon discharge consistently trigger severe riverine flooding.
-
 ---
 
 ### **Moderately Susceptible Upazilas (20–50%)**
