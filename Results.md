@@ -5,10 +5,7 @@ This section presents the spatial distribution of flood susceptibility across th
 Upazila-wise areas were calculated using the **Tabulate Area** tool in ArcMap.
 The proportion of susceptible land was derived using:
 
-$$
-\% \text{Susceptible} = \frac{\text{High} + \text{Very High}}{\text{Total Area}} \times 100
-$$
-
+![% Susceptible](https://latex.codecogs.com/svg.latex?%5C%25%20%5Ctext{Susceptible}%20=%20%5Cfrac%7B%5Ctext{High}%20%2B%20%5Ctext{Very%20High}%7D%7B%5Ctext{Total%20Area}%7D%20%5Ctimes%20100)
 
 ---
 
