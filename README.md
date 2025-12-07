@@ -2,99 +2,98 @@
 
 ## **Overview**
 
-This repository presents a complete workflow for generating a **Flood Susceptibility Map** for the Rangpur region of Bangladesh using an **Analytical Hierarchy Process (AHP)**–based Multi-Criteria Decision Analysis (MCDA) approach.
-The project integrates multi-source geospatial datasets, hydrological derivatives, land use information, and climatic variables to characterize the spatial likelihood of flood occurrence.
+This repository presents a complete workflow for generating a **Flood Susceptibility Map** for the Rangpur Division of Bangladesh using an **Analytical Hierarchy Process (AHP)**–based Multi-Criteria Decision Analysis (MCDA) approach.
 
-The modelling framework ensures a **transparent, accurate**, and **scalable** methodology suitable for scientific research, disaster risk reduction, and spatial planning.
+The study integrates multi-source geospatial datasets, hydrological derivatives, land-use classifications, and climatic variables to quantify the spatial likelihood of flooding. The modelling framework is designed to be **transparent, reproducible, and scalable**, supporting scientific research, disaster risk reduction, and spatial planning.
 
 ---
 
 ## **Objectives**
 
-* To integrate **terrain, hydrological, climatic, and land-use factors** for flood susceptibility modelling.
-* To compute **AHP-derived weights** for eight flood-conditioning parameters.
-* To generate a **continuous flood susceptibility index** and a **5-class zonation map**.
-* To deliver **area-wise flood susceptibility statistics** to identify zones of Very Low to Very High vulnerability within the study area.
-* To support informed decision-making for **flood mitigation, preparedness, and infrastructure planning**.
+* Integrate **terrain, hydrological, climatic, and land-use parameters** for flood susceptibility modelling.
+* Compute **AHP-derived weights** for eight flood-conditioning factors.
+* Generate a **continuous Flood Susceptibility Index (FSI)** and a **five-class susceptibility map**.
+* Produce **area-based susceptibility statistics** to identify critical flood-prone zones.
+* Support evidence-based **flood mitigation, preparedness, and infrastructure planning**.
 
 ---
 
 ## **Data Sources**
 
-Eight conditioning factors were used for flood susceptibility modelling:
+Eight conditioning factors were used in the modelling approach:
 
-| No. | Feature                         | Source Repository / Dataset           | Notes                                                   |
-| --- | ------------------------------- | ------------------------------------- | ------------------------------------------------------- |
-| 1   | DEM                             | *gee-hydrology-toolkit*               | Base for terrain and hydrological derivatives.          |
-| 2   | Slope                           | *gee-hydrology-toolkit*               | Derived from DEM.                                       |
-| 3   | Flow Accumulation               | *gee-hydrology-toolkit*               | Indicates runoff concentration.                         |
-| 4   | TWI (Topographic Wetness Index) | *gee-hydrology-toolkit*               | Represents soil moisture accumulation potential.        |
-| 5   | Distance to River               | *gee-hydrology-toolkit*               | Euclidean distance from major drainage networks.        |
-| 6   | Precipitation                   | CRU Time-Series (processed in ArcMap) | Long-term monsoon rainfall indicator.                   |
-| 7   | Land Use / Land Cover (LULC)    | *LULC-Rangpur-2023*                   | Independent 2023 LULC dataset created by the author.    |
-| 8   | Elevation-derived indicators    | *gee-hydrology-toolkit*               | Secondary terrain parameters supporting AHP evaluation. |
+| No. | Factor                       | Source / Repository       | Notes                                          |
+| --- | ---------------------------- | ------------------------- | ---------------------------------------------- |
+| 1   | DEM                          | *gee-hydrology-toolkit*   | Base for terrain and hydrological derivatives. |
+| 2   | Slope                        | *gee-hydrology-toolkit*   | Derived from DEM.                              |
+| 3   | Flow Accumulation            | *gee-hydrology-toolkit*   | Indicates flow concentration.                  |
+| 4   | TWI                          | *gee-hydrology-toolkit*   | Represents soil moisture potential.            |
+| 5   | Distance to River            | *gee-hydrology-toolkit*   | Euclidean distance to rivers.                  |
+| 6   | Precipitation                | CRU (processed in ArcMap) | Long-term monsoon rainfall.                    |
+| 7   | Land Use / Land Cover (LULC) | *LULC-Rangpur-2023*       | 2023 LULC dataset produced by the author.      |
+| 8   | Elevation-derived Indicators | *gee-hydrology-toolkit*   | Additional terrain metrics.                    |
 
-**Referenced GitHub Repositories:**
+### **Referenced Repositories**
 
-* 🌐 LULC 2023: [https://github.com/Saeedsourav1/LULC-Rangpur-2023](https://github.com/Saeedsourav1/LULC-Rangpur-2023)
-* 🌐 Hydrological Toolkit: [https://github.com/Saeedsourav1/gee-hydrology-toolkit](https://github.com/Saeedsourav1/gee-hydrology-toolkit)
+* 🌐 LULC 2023 Dataset:
+  [https://github.com/Saeedsourav1/LULC-Rangpur-2023](https://github.com/Saeedsourav1/LULC-Rangpur-2023)
+* 🌐 Hydrology Toolkit:
+  [https://github.com/Saeedsourav1/gee-hydrology-toolkit](https://github.com/Saeedsourav1/gee-hydrology-toolkit)
 
 ---
 
 ## **Methodology**
 
-The workflow follows four major phases:
+The workflow is divided into four primary phases.
+
+---
 
 ### **1. Data Acquisition & Preprocessing**
 
-* DEM hydrological correction
-* Slope and flow accumulation generation
+* Hydrological conditioning of DEM
+* Slope & flow accumulation generation
 * TWI computation
-* Distance-to-river raster generation
-* CRU precipitation processing in ArcMap
-* LULC extraction from the author’s LULC repository
-* Projection to UTM Zone 45N and raster alignment
-* Study area clipping
-
-All preprocessing steps are stored in `/scripts/01_extract_features`.
+* Distance-to-river raster derivation
+* CRU precipitation extraction
+* LULC generation via author’s repository
+* Projection to **UTM 45N**
+* Raster alignment and clipping
 
 ---
 
 ### **2. AHP Weight Determination**
 
-AHP was used to determine the relative contribution of each conditioning factor.
+AHP was used to derive weights for the eight factors.
 
 Steps:
 
-* Pairwise comparison matrix generation
-* Computation of normalized eigenvector weights
-* Consistency Ratio (CR) validation (acceptable when CR < 0.1)
-* Exporting final AHP weights
+* Constructing a pairwise comparison matrix
+* Normalizing the matrix
+* Eigenvector-based weight computation
+* Consistency ratio (CR) validation (**acceptable when CR < 0.10**)
 
-Files are stored in `/docs/methodology.md`.
+Weight calculation formula:
+
+![AHP Weight](https://latex.codecogs.com/svg.latex?w_i%20=%20%5Cfrac%7B%5Csum_%7Bj=1%7D%5En%20a_%7Bij%7D%27%7D%7Bn%7D)
 
 ---
 
 ### **3. Flood Susceptibility Modelling**
 
-A weighted linear combination (WLC) approach was applied:
+Flood Susceptibility Index (FSI) was computed using a Weighted Linear Combination (WLC):
 
-[
-FSI = \sum_{i=1}^{8} (w_i \cdot f_i)
-]
+![FSI](https://latex.codecogs.com/svg.latex?FSI%20=%20%5Csum_%7Bi=1%7D%5E8%20%28w_i%20%5Ccdot%20f_i%29)
 
 Where:
 
 * **FSI** = Flood Susceptibility Index
-* **( w_i )** = AHP weight of factor *i*
-* **( f_i )** = Standardized raster of factor *i*
+* ( w_i ) = Weight of factor *i*
+* ( f_i ) = Standardized raster value
 
-Outputs include:
+Outputs:
 
-* Continuous susceptibility index raster
-* Five-class hazard map (“Very Low” → “Very High”)
-
-Scripts are inside `/docs/weighted_calculattion`.
+* Continuous susceptibility raster
+* Five-class zonation map (Very Low → Very High)
 
 ---
 
@@ -103,46 +102,52 @@ Scripts are inside `/docs/weighted_calculattion`.
 ```
 flood-susceptibility-ahp/
 │
-├── results/
-│   ├── Distance to river.png
+├── Images/
+│   ├── Distance_to_river.png
 │   ├── Elevation.png
-│   ├── Flow accumulation.png
+│   ├── Flow_accumulation.png
 │   ├── LULC.png
 │   ├── NDVI.png
 │   ├── Precipitation.png
-│   ├── slope.png
-│   ├── upazilla bar chart.png
-│   ├── upazilla heatmap.png
-└── result.md
+│   ├── Slope.png
+│   ├── upazila_bar_chart.png
+│   ├── upazila_heatmap.png
+│   └── result.md
+├── src/
+│   ├── AHP..xlsx
+│   └── consistency.ipynb
+│
+└── methodology.md 
+│
+└── README.md    
+│
+└── Results.md   
 
-
-
-└── docs/
-    ├── AHP.xlsx
-    └── methodology.md
 ```
 
 ---
 
 ## **Results**
 
-* Flood Susceptibility Index (FSI) raster
-* 5-class zonation map (Very Low → Very High)
-* AHP weight table
-* **Area distribution by susceptibility class**, identifying which parts of the study area are more vulnerable
+The analysis produces:
 
-These results support:
+* Flood Susceptibility Index raster
+* Five-class susceptibility zonation
+* AHP weight matrix
+* Area distribution statistics for each class
 
-* Disaster management & emergency planning
-* Flood zoning & land-use regulation
-* Infrastructure risk assessment
+Applications include:
+
+* Disaster risk management
+* Flood zoning and land-use policy
+* Infrastructure vulnerability assessment
 * Hydrological and environmental research
 
 ---
 
 ## **Citation**
 
-If you use this repository, please cite:
+If you use this repository, please reference:
 
 ```
 Saeed Sourav. (2023). LULC-Rangpur-2023. GitHub Repository.
@@ -152,29 +157,25 @@ Saeed Sourav. (2024). GEE Hydrology Toolkit. GitHub Repository.
 https://github.com/Saeedsourav1/gee-hydrology-toolkit
 
 Saeed Sourav. (2025). Flood Susceptibility Mapping in Rangpur Division Using AHP and Multi-Criteria GIS Analysis. GitHub Repository.
-https://github.com/Saeedsourav1/LULC-Rangpur-2023
+https://github.com/Saeedsourav1/flood-susceptibility-ahp
 ```
 
 ---
-
 
 ## **License**
 
 This project is protected under **All Rights Reserved**.
 
-No part of the datasets, maps, scripts, figures, or documentation in this repository may be copied, reproduced, modified, distributed, or used for any purpose without explicit written permission from the author.
-
-Unauthorized use is strictly prohibited.
+Unauthorized copying, reproduction, distribution, or modification of datasets, maps, scripts, or documentation is strictly prohibited without explicit written permission from the author.
 
 ---
-
 
 ## **Contact**
 
 **Saeed Sourav**
-Civil Engineer | Researcher
-Email: [saeedsourav2@gmail.com](mailto:saeedsourav2@gmail.com)
-GitHub: [https://github.com/Saeedsourav1](https://github.com/Saeedsourav1)
+Civil Engineer • Researcher
+📧 Email: *[saeedsourav2@gmail.com](mailto:saeedsourav2@gmail.com)*
+🌐 GitHub: [https://github.com/Saeedsourav1](https://github.com/Saeedsourav1)
 
 ---
 
