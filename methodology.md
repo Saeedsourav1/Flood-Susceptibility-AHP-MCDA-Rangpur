@@ -1,4 +1,4 @@
-# 📄 **Methodology for Flood Susceptibility Mapping Using AHP and Multi-Criteria GIS Analysis**
+# 📄 **Methodology for Flood Susceptibility Mapping in the Rangpur Division Using AHP and Google Earth Engine–Based Multi-Criteria GIS Analysis**
 
 ## **1. Introduction**
 
